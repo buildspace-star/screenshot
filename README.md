@@ -1,6 +1,12 @@
 # screenshot
 
-终端风格的截图工具集。将代码文件或命令输出渲染为 PNG 图像。
+专为 Agent（Codex、Claude Code 等）打造的截图工具集。解决 Agent 无法直接截图代码文件和终端输出的问题 — 将代码文件或命令输出渲染为带语法高亮的 PNG 图像，方便在对话中分享。
+
+## 效果展示
+
+![code-shot 示例](examples/code-hello.png)
+![code-shot 深色主题](examples/code-hello-dark.png)
+![term-shot 示例](examples/term-demo.png)
 
 ## 安装
 
@@ -14,6 +20,8 @@ pip install -r requirements.txt
 ln -s $(pwd)/scripts/code-shot /usr/local/bin/code-shot
 ln -s $(pwd)/scripts/term-shot /usr/local/bin/term-shot
 ```
+
+如果你正在使用 Codex 或 Claude Code，可以直接让它帮你完成上面这些安装步骤。
 
 ## 工具
 
@@ -71,7 +79,7 @@ echo "output" | term-shot --stdin -o result.png            # 管道输入
 | `--font-size` | 字体大小（默认：20） |
 | `--json` | JSON 模式输出 |
 
-截图自动包含终端提示符行。mac 风格：
+使用 `-c/--command` 时，截图会自动包含终端提示符行。mac 风格：
 
 ```
 用户名@主机名 当前目录 % 命令
@@ -85,10 +93,12 @@ C:\Users\用户名\目录> 命令
 命令输出...
 ```
 
+使用 `--stdin` 时不会自动添加提示符，仅渲染标准输入内容本身。
+
 默认：纯白背景 `(255,255,255)`、纯黑文字 `(0,0,0)`、无行号。`--theme dark` 使用黑色背景和白色文字。
 
 ## 依赖
 
-- Python 3.8+
+- Python 3.8+（请根据你使用的 Pillow 版本确认兼容性）
 - Pillow（图像渲染）
 - Pygments（语法高亮）
